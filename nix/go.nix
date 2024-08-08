@@ -46,7 +46,6 @@ in
 
         ${preCheck}
 
-        echo "ASDASDDSA"
         echo "➜ Source: ${src}"
 
         echo "➜ Running go generate ./${submodule}/... and checking sha1sum of all files"
@@ -64,7 +63,7 @@ in
         golines -l --base-formatter=gofumpt . | diff - /dev/null
 
         echo "➜ Checking for vulnerabilities"
-        #govulncheck ./${submodule}/...
+        govulncheck ./${submodule}/...
 
         echo "➜ Running golangci-lint"
         golangci-lint run \
@@ -73,10 +72,6 @@ in
 
 
         echo "➜ Running tests"
-        echo richgo test \
-          -tags="${pkgs.lib.strings.concatStringsSep " " tags}" \
-          -ldflags="${pkgs.lib.strings.concatStringsSep " " ldflags}" \
-          -v ${goTestFlags} ./${submodule}/...
         richgo test \
           -tags="${pkgs.lib.strings.concatStringsSep " " tags}" \
           -ldflags="${pkgs.lib.strings.concatStringsSep " " ldflags}" \
