@@ -55,3 +55,7 @@ build-docker-image:  ## Build docker container for native architecture
 		.\#packages.$(ARCH)-linux.docker-image \
 		--print-build-logs
 	docker load < result
+
+.PHONY: format 
+format: ## Format go files using golines and gofumpt
+	golines -w --base-formatter=gofumpt .
