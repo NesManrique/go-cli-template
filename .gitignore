@@ -25,7 +25,10 @@ go.work.sum
 .env
 
 # direnv
-.direnv
+.direnv/
 
 # vim
 *.swp
+
+# build output
+result

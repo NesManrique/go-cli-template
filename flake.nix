@@ -47,6 +47,7 @@
             "./go.mod"
             "./go.sum"
             (inDirectory "vendor")
+            isDirectory
             (nix-filter.lib.matchExt "go")
           ];
         };
@@ -85,26 +86,26 @@
         };
 
         packages = flake-utils.lib.flattenTree rec {
-          example = nix-lib.go.package {
+          go-cli-template = nix-lib.go.package {
             inherit name src version ldflags buildInputs nativeBuildInputs;
           };
 
-          example-arm64-darwin = (nix-lib.go.package {
+          go-cli-template-arm64-darwin = (nix-lib.go.package {
             inherit name src version ldflags buildInputs nativeBuildInputs;
             cgoEnabled = 0;
           }).overrideAttrs (old: old // { GOOS = "darwin"; GOARCH = "arm64"; });
 
-          example-amd64-darwin = (nix-lib.go.package {
+          go-cli-template-amd64-darwin = (nix-lib.go.package {
             inherit name src version ldflags buildInputs nativeBuildInputs;
             cgoEnabled = 0;
           }).overrideAttrs (old: old // { GOOS = "darwin"; GOARCH = "amd64"; });
 
-          example-arm64-linux = (nix-lib.go.package {
+          go-cli-template-arm64-linux = (nix-lib.go.package {
             inherit name src version ldflags buildInputs nativeBuildInputs;
             cgoEnabled = 0;
           }).overrideAttrs (old: old // { GOOS = "linux"; GOARCH = "arm64"; });
 
-          example-amd64-linux = (nix-lib.go.package {
+          go-cli-template-amd64-linux = (nix-lib.go.package {
             inherit name src version ldflags buildInputs nativeBuildInputs;
             cgoEnabled = 0;
           }).overrideAttrs (old: old // { GOOS = "linux"; GOARCH = "amd64"; });
@@ -112,10 +113,10 @@
           docker-image = nix-lib.go.docker-image {
             inherit name version buildInputs;
 
-            package = example;
+            package = go-cli-template;
           };
 
-          default = example;
+          default = go-cli-template;
         };
 
       });

@@ -46,7 +46,7 @@ check:   ## Run nix flake check
 build:  ## Build application and places the binary under ./result/bin
 	nix build \
 		--print-build-logs \
-		.\#example-$(ARCH)-$(OS)
+		.\#go-cli-template-$(ARCH)-$(OS)
 
 
 .PHONY: build-docker-image
