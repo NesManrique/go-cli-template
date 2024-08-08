@@ -44,8 +44,10 @@
         src = nix-filter.lib.filter {
           root = ./.;
           include = with nix-filter.lib;[
+            "./go.mod"
+            "./go.sum"
+            (inDirectory "vendor")
             (nix-filter.lib.matchExt "go")
-            ./go.mod
           ];
         };
 
