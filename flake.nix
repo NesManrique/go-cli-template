@@ -64,7 +64,7 @@
       {
         checks = flake-utils.lib.flattenTree rec {
           nixpkgs-fmt = nix-lib.nix.check { src = nix-src; };
-          
+
           go-checks = nix-lib.go.check {
             inherit src submodule ldflags tags buildInputs nativeBuildInputs checkDeps;
           };
